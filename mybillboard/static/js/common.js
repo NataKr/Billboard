@@ -40,7 +40,7 @@ Billboard.bindButtonsAndEvents=function(){
     $("#clear-post").click(Billboard.clearPost);
 //    $("#submit-post").click(Billboard.submitPost);
 //    $("#submit-btn-wrap").click(Billboard.additionalSubmitActions);
-    $('#myform').submit(Billboard.removeMessage);
+    $('.myform').submit(Billboard.removeMessage);
 }
 
 Billboard.showNewPostField=function(){
@@ -75,7 +75,7 @@ Billboard.clearPost=function(){
 Billboard.removeMessage=function(e){
     console.log('form clicked');
     e.preventDefault();
-    var form=$(this);
+    var form=$(e.target);
 //    var form=$("<form/>");
 //    var inp=$("<input/>");
 //    inp.attr('name','subject');

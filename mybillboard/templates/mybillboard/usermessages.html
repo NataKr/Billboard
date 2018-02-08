@@ -20,7 +20,7 @@
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 mycolumn content middle">
             {% if posts %}
                 {% for post in posts %}
-                <form id="myform">
+                <form id="myform" class="myform">
                     {% csrf_token %}
                     <div class="post-box">
                         <div class="post-date">{{post.get_month}}/{{post.get_day}}/{{post.get_year}}</div>
