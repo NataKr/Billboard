@@ -1,0 +1,14 @@
+{% extends 'mybillboard/index.html' %}
+
+{% block title-billboard %}
+    <div class="row myrow billboard">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mycolumn header">
+            <h1 class="billboard">{{title}}</h1>
+            <form method="POST" action="{% url 'register' %}" class="login-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" class="btn" value="Register"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}

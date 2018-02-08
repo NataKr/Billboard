@@ -1,78 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Pinyon+Script" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'css/common.css' %}" type="text/css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
+{% extends 'mybillboard/index.html' %}
 
-<div class="container-fluid">
 {% block registration-info %}
-    {% if user.is_authenticated %}
     <div class="row myrow user-corner">
         <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 mycolumn user-corner left"></div>
             <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 mycolumn user-corner middle">
                 <div class="user-corner-wrapper">
                     <span id="user-name">{{user}}</span>
-                    <a id="my-cabinet" href="{% url 'user_view' user %}">My messages</a>
+                    <a id="my-cabinet" href="{% url 'board' %}">Back to board</a>
                     <a id="logout" href="{% url 'logout' %}">Logout</a>
                 </div>
             </div>
         <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 mycolumn user-corner right"></div>
     </div>
-    {% endif %}
-{% endblock %}
-
-{% block title-billboard %}
-    <div class="row myrow billboard">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mycolumn header">
-            <h1 class="billboard">{{title}}</h1>
-            {% if user.is_anonymous %}
-                <div class="auth-wrapper">
-                    <p class="anonymous-user">{{user}}</p>
-                    <div class="login-and-register">
-                        <div class="auth-div" id="login-box"><a href="{% url 'login' %}">Login</a></div>
-                        <div class="auth-div" id="register-box"><a href="{% url 'register' %}">Register</a></div>
-                    </div>
-                </div>
-            {% endif %}
-        </div>
-    </div>
 {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
     <div class="row myrow content">
         <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 mycolumn content left"></div>
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 mycolumn content middle">
             {% if posts %}
                 {% for post in posts %}
+                <form id="myform">
+                    {% csrf_token %}
                     <div class="post-box">
                         <div class="post-date">{{post.get_month}}/{{post.get_day}}/{{post.get_year}}</div>
                         <div class="post-content-wrapper">
-                            <h3 class="subject-header">{{post.subject}}</h3>
+                            <h3 class="subject-header" id="subject-header">{{post.subject}}</h3>
                             <div class="message-body">{{post.message}}</div>
-                            <button id="comments-btn">Comments</button>
+
+                                <input type="hidden" name="msg-id" id="msg-id" value="{{post.id}}"/>
+                                <input type="submit" id="remove-msg" value="Delete"/>
+
                             <div class="user-name">{{post.user_name}}</div>
                         </div>
                     </div>
-                        {% if comment in comments %}
-
-                        {% endif %}
+                </form>
                 {% endfor %}
             {% else %}
                 <div class="no-messages-notification">
@@ -83,11 +45,9 @@
         </div>
         <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 mycolumn content right"></div>
     </div>
-    {% endif %}
 {% endblock %}
 
 {% block new-message %}
-    {% if user.is_authenticated %}
     <div class="row myrow add">
         <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 mycolumn content left"></div>
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 mycolumn content middle">
@@ -114,11 +74,4 @@
         </div>
         <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 mycolumn content right"></div>
     </div>
-    {% endif %}
 {% endblock %}
-
-</div>
-{% load staticfiles %}
-<script src="{% static 'js/common.js' %}"></script>
-</body>
-</html>

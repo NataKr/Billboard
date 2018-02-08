@@ -20,3 +20,9 @@ class Post(models.Model):
 
     def get_date(self):
         return self.post_date.date()
+    def get_day(self):
+        return self.post_date.day
+    def get_month(self):
+        return self.post_date.month
+    def get_year(self):
+        return self.post_date.year

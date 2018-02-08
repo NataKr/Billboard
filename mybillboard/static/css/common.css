@@ -1,3 +1,184 @@
-body{
+/*body{
     background-color: salmon;
+}*/
+.mycolumn.header .billboard{
+    font-family: 'Anton', sans-serif;
+    font-size: 40px;
+    color: black;
+    text-align: center;
+}
+
+.post-box{
+    position: relative;
+    border: 3px solid #00b7ef;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+.post-box-new{
+    position: relative;
+    border: 3px dashed #00b7ef;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+.post-date{
+    position: absolute;
+    font-family: 'Poiret One', cursive;
+    font-size: 16px;
+    color: black;
+    margin-top: -10px;
+    margin-left: 20px;
+    display: inline-block;
+    z-index: 123;
+    background-color: white;
+    padding: 0 5px;
+}
+
+.post-content-wrapper{
+    padding: 0px 20px 15px 20px;
+    position: relative;
+}
+
+    .subject-header{
+        font-family: 'Anton', sans-serif;
+        font-size: 30px;
+        color:#00b7ef;
+
+    }
+    .message-body{
+        font-family: Arial, sans-serif;
+        font-size : 16px;
+        color:#c1bfc0;
+    }
+    .user-name{
+        /*font-family: 'Pinyon Script', cursive;*/
+        font-family: 'Great Vibes', cursive;
+        font-size: 24px;
+        color: black;
+        margin-top: 15px;
+        text-align: right;
+    }
+.add-post-holder{
+    border: 1px dashed black;
+    max-width: 800px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+    #submit-btn-wrap{
+        display: inline-block;
+    }
+    .add-post{
+        font-size: 16px;
+        background-color: #66CDAA;
+        margin: 5px 0px;
+        border: 1px solid #66CDAA;
+        color: white;
+        padding: 3px 30px;
+        border-radius: 3px;
+        border-radius: 3px;
+    }
+    .add-post:focus{
+        border: 1px solid #66CDAA;
+    }
+        .fa.fa-plus-square{
+
+        }
+
+    #logout{
+        color: black;
+    }
+    #my-cabinet{
+        color: black;
+    }
+
+    .clear-post{
+        font-size: 16px;
+        background-color: red;
+        margin: 5px 0px;
+        border: 1px solid red;
+        color: white;
+        padding: 3px 30px;
+        border-radius: 3px;
+        border-radius: 3px;
+    }
+
+.post-content-wrapper-new{
+    padding: 25px 20px 15px 20px;
+    position: relative;
+}
+
+    #message-field{
+        height: 100px;
+        margin-top: 20px;
+    }
+
+    #username-wrapper{
+        text-align: right;
+    }
+
+.hidden-content{
+    display: none;
+}
+
+.no-messages-notification{
+    font-family: Arial, sans-serif;
+    font-size : 24px;
+    color: black;
+    text-align:center;
+}
+
+/*Login and logout*/
+
+.auth-div{
+    display: inline-block;
+    border: 3px dashed #00b7ef;
+    padding: 20px 0px;
+    width: 100px;
+}
+
+.anonymous-user{
+    text-align: center;
+}
+
+.header.auth-wrapper{
+    text-align: center;
+}
+
+.login-and-register{
+    text-align: center;
+}
+
+.login-form{
+    text-align: center;
+}
+
+    .login-form input{
+        display: block;
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .login-form label{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        #remove-msg{
+            border: 1px solid #00b7ef;
+            background-color: #00b7ef;
+            border-radius: 5px;
+            color: white;
+            margin-top: 5px;
+        }
+
+#comments-btn{
+        border: 1px solid #00b7ef;
+        background-color: #00b7ef;
+        border-radius: 5px;
+        color: white;
+        margin-top: 5px;
 }
