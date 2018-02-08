@@ -16,7 +16,7 @@ class Post(models.Model):
     post_date=models.DateTimeField('post_date')
 
     def __str__(self):
-        return self.user_name
+        return self.subject
 
     def get_date(self):
         return self.post_date.date()
@@ -26,3 +26,39 @@ class Post(models.Model):
         return self.post_date.month
     def get_year(self):
         return self.post_date.year
+
+@python_2_unicode_compatible
+class Comment(models.Model):
+    post=models.ForeignKey(Post, on_delete=models.CASCADE)
+    comment_date=models.DateTimeField('comment_date')
+    comment_message=models.CharField(max_length=400)
+    comment_user=models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.post
+    def get_date(self):
+        return self.comment_date.date()
+    def get_day(self):
+        return self.comment_date.day
+    def get_month(self):
+        return self.comment_date.month
+    def get_year(self):
+        return self.comment_date.year
+
+@python_2_unicode_compatible
+class Comment_new(models.Model):
+    post=models.ForeignKey(Post, on_delete=models.CASCADE)
+    comment_date=models.DateTimeField('comment_date')
+    comment_message=models.CharField(max_length=400)
+    comment_user=models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.post
+    def get_date(self):
+        return self.comment_date.date()
+    def get_day(self):
+        return self.comment_date.day
+    def get_month(self):
+        return self.comment_date.month
+    def get_year(self):
+        return self.comment_date.year

@@ -66,13 +66,9 @@
                         <div class="post-content-wrapper">
                             <h3 class="subject-header">{{post.subject}}</h3>
                             <div class="message-body">{{post.message}}</div>
-                            <button id="comments-btn">Comments</button>
                             <div class="user-name">{{post.user_name}}</div>
                         </div>
                     </div>
-                        {% if comment in comments %}
-
-                        {% endif %}
                 {% endfor %}
             {% else %}
                 <div class="no-messages-notification">
