@@ -61,14 +61,20 @@
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 mycolumn content middle">
             {% if posts %}
                 {% for post in posts %}
+                <form class="comments-frm">
                     <div class="post-box">
                         <div class="post-date">{{post.get_month}}/{{post.get_day}}/{{post.get_year}}</div>
                         <div class="post-content-wrapper">
                             <h3 class="subject-header">{{post.subject}}</h3>
                             <div class="message-body">{{post.message}}</div>
+
+                                <input type="hidden" name="post-id" value="{{post.id}}"/>
+                                <input type="submit" class="show-comments-btn" value="Show comments"/>
+
                             <div class="user-name">{{post.user_name}}</div>
                         </div>
                     </div>
+                </form>
                 {% endfor %}
             {% else %}
                 <div class="no-messages-notification">

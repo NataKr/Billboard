@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Post
+from .models import Post, Comment_new
 from .forms import UserLoginForm, UserRegisterForm
 import datetime
 from django.contrib.auth import (authenticate,
@@ -13,28 +13,32 @@ from django.contrib.auth import (authenticate,
 # Create your views here.
 
 def index(request):
-    pass
-
-    #post_list = Post.objects.all()
-    # post_list = Post.objects.order_by("-post_date")
-    # user = request.user
-    # context = {
-    #     'title': 'BILLBOARD',
-    #     'posts': post_list,
-    #     'user':user,
-    # }
-    # return render(request, 'mybillboard/index.html', context)
-    #return HttpResponse("You are at billboard index.")
+    return redirect('board')
 
 def board(request):
     post_list = Post.objects.order_by("-post_date")
+    #comment_list=Comment_new.objects.order_by("-comment_date")
+
     user=request.user
     context = {
         'title': 'BILLBOARD',
         'user': user,
         'posts': post_list,
+        #'comments':comment_list,
     }
     return render(request, 'mybillboard/index.html', context)
+
+def get_comments(request):
+    id=request.POST["post-id"]
+    comments_qs=Comment_new.objects.filter(post__id=id)
+    comments_list=[]
+    for comment in comments_qs:
+        comment_obj={}
+        comment_obj['comment_date']=comment.comment_date
+        comment_obj['comment_message']=comment.comment_message
+        comment_obj['comment_user']=comment.comment_user
+        comments_list.append(comment_obj)
+    return JsonResponse({'comments': comments_list, 'msg':id})
 
 def add_post(request):
     data = request.POST
@@ -64,11 +68,15 @@ def remove_message(request):
     msg_id=request.POST.get("msg-id")
     print msg_id
     msg_to_delete=Post.objects.get(pk=msg_id)
-    m=msg_to_delete.delete()
-    print m
-    new_user = request.user
-    print "lalala " + new_user.username
-    return JsonResponse({'msg': msg_id+'was deleted'})
+    try:
+        m=msg_to_delete.delete()
+        print m
+        new_user = request.user
+        print "lalala " + new_user.username
+        return JsonResponse({'msg': msg_id + 'was deleted'})
+    except Exception as e:
+        return JsonResponse({'msg': 'message cannot be deleted due to existing comments'})
+
 
     # user = request.user.username
     # post_list = Post.objects.filter(user_name=user).order_by("-post_date")

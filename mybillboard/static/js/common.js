@@ -38,6 +38,7 @@ $(document).ready(function(){
 Billboard.bindButtonsAndEvents=function(){
     $("#add-post").click(Billboard.showNewPostField);
     $("#clear-post").click(Billboard.clearPost);
+    $(".comments-frm").submit(Billboard.showComments);
 //    $("#submit-post").click(Billboard.submitPost);
 //    $("#submit-btn-wrap").click(Billboard.additionalSubmitActions);
     $('.myform').submit(Billboard.removeMessage);
@@ -58,6 +59,45 @@ Billboard.showNewPostField=function(){
 Billboard.clearPost=function(){
     $("#subject-field").val("");
     $("#message-field").val("");
+}
+
+Billboard.showComments=function(e){
+    console.log("form clicked")
+    e.preventDefault();
+    form=$(e.target);
+    $.post('/mybillboard/board/get_comments/', form.serialize(), function(response){
+        console.log(response);
+//        alert(response['msg']);
+        var comments_array=response['comments'];
+        console.log (comments_array);
+        if (comments_array){
+            for (var i=0; i<comments_array.length; i++){
+                var comment_box=$("<div/>");
+                comment_box.attr('class','comment-box');
+
+                var comment_date=$("<div/>");
+                comment_date.attr('class', 'comment-content');
+                comment_date.text(comments_array[i]["comment_date"]);
+                comment_box.append(comment_date);
+
+                var comment_msg=$("<div/>");
+                comment_msg.attr('class', 'comment-content');
+                comment_msg.text(comments_array[i]["comment_message"]);
+                comment_box.append(comment_msg);
+
+                var comment_user=$("<div/>");
+                comment_user.attr('class', 'comment-content');
+                comment_user.text(comments_array[i]["comment_user"]);
+                comment_box.append(comment_user);
+
+                form.append(comment_box);
+
+                form.unbind('submit', Billboard.showComments);
+            }
+        }
+    });
+//    $(".comment-box-wrap").toggleClass('hidden-content');
+    return false;
 }
 
 //Billboard.additionalSubmitActions=function(){

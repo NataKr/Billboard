@@ -53,7 +53,7 @@ class Comment_new(models.Model):
     comment_user=models.CharField(max_length=20)
 
     def __str__(self):
-        return self.post
+        return unicode(self.post)
     def get_date(self):
         return self.comment_date.date()
     def get_day(self):

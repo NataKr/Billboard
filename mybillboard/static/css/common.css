@@ -15,6 +15,16 @@
     margin-top: 20px;
 }
 
+.comment-box{
+    max-width: 800px;
+    border: 1px solid #00b7ef;
+    margin-top: 10px;
+}
+
+    .comment-content{
+        padding: 5px 20px 5px 20px;
+    }
+
 .post-box-new{
     position: relative;
     border: 3px dashed #00b7ef;
@@ -175,7 +185,7 @@
             margin-top: 5px;
         }
 
-#comments-btn{
+.show-comments-btn{
         border: 1px solid #00b7ef;
         background-color: #00b7ef;
         border-radius: 5px;
